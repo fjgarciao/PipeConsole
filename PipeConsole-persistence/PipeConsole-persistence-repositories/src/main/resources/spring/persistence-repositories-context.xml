@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa
+    	http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    	http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<import resource="classpath:spring/persistence-model-context.xml" />
+	<import resource="persistence-jpa-context.xml" />
+
+	<jpa:repositories base-package="com.fjgarciao.pipeconsole.persistence.repositories"
+		transaction-manager-ref="transactionManager"
+		entity-manager-factory-ref="entityManagerFactory"
+		factory-class="com.fjgarciao.pipeconsole.persistence.beans.LocalSimpleJpaRepositoryFactoryBean" />
+
+	<bean id="customizableTraceInterceptor"
+		class="org.springframework.aop.interceptor.CustomizableTraceInterceptor">
+		<property name="enterMessage" value="Entering $[methodName]($[arguments])" />
+		<property name="exitMessage" value="Leaving $[methodName](): $[returnValue]" />
+	</bean>
+
+	<aop:config>
+		<aop:advisor advice-ref="customizableTraceInterceptor"
+			pointcut="execution(public * com.fjgarciao.pipeconsole.persistence.beans.LocalJpaRepository+.*(..))" />
+	</aop:config>
+</beans>

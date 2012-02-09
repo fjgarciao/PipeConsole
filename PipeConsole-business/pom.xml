@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>PipeConsole</artifactId>
+		<groupId>com.fjgarciao</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	
+	<groupId>com.fjgarciao.PipeConsole</groupId>
+	<artifactId>PipeConsole-business</artifactId>
+	<packaging>pom</packaging>
+
+	<name>Modulo de objetos de negocio</name>
+	<description>Contiene dos submódulos: se ha separado en dos módulos para permitir construir varias implementaciones aislando los interfaces. La idea es realizar dos implementaciones, una directa y otra a través de comunicación WebService o REST.
+- Interfaces: contiene las interfaces de los objetos de negocio.
+- Impl: contiene la implementación de estas interfaces realizando llamadas directas al DAO.</description>
+
+	<dependencies>
+		<!-- Dependencias internas -->
+		<dependency>
+			<groupId>com.fjgarciao.PipeConsole</groupId>
+			<artifactId>PipeConsole-commons</artifactId>
+		</dependency>
+	</dependencies>
+  <modules>
+    <module>PipeConsole-business-interfaces</module>
+    <module>PipeConsole-business-impl</module>
+  </modules>
+</project>
