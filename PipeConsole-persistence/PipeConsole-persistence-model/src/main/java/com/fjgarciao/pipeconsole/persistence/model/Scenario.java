@@ -1,6 +1,5 @@
 package com.fjgarciao.pipeconsole.persistence.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,7 +17,7 @@ import com.fjgarciao.pipeconsole.persistence.Entidad;
  */
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
-public class Scenario extends Entidad<Long> implements Serializable {
+public class Scenario extends Entidad<Long> {
 
 	private static final long serialVersionUID = 1L;
 	

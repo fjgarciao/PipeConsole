@@ -1,16 +1,20 @@
 package com.fjgarciao.pipeconsole.persistence.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import com.fjgarciao.pipeconsole.persistence.Entidad;
-import java.io.Serializable;
-import java.lang.Long;
-import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Element
  * 
  */
 @Entity
-public class Element extends Entidad<Long> implements Serializable {
+public class Element extends Entidad<Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -22,7 +26,13 @@ public class Element extends Entidad<Long> implements Serializable {
 	private ElementType type;
 
 	@Column(nullable = false)
+	private Integer priority; // 1 is max
+	
+	@Column(nullable = false)
 	private Integer distance; // En cms
+	
+	@Column(nullable = false)
+	private Integer maxFlow; // En cls
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
@@ -51,12 +61,28 @@ public class Element extends Entidad<Long> implements Serializable {
 		this.type = type;
 	}
 
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
+	}
+
 	public Integer getDistance() {
 		return distance;
 	}
 
 	public void setDistance(Integer distance) {
 		this.distance = distance;
+	}
+
+	public Integer getMaxFlow() {
+		return maxFlow;
+	}
+
+	public void setMaxFlow(Integer maxFlow) {
+		this.maxFlow = maxFlow;
 	}
 
 	public Canal getCanal() {
@@ -73,6 +99,13 @@ public class Element extends Entidad<Long> implements Serializable {
 
 	public void setScenario(Scenario scenario) {
 		this.scenario = scenario;
+	}
+
+	@Override
+	public String toString() {
+		return "Element [id=" + id + ", type=" + type + ", priority="
+				+ priority + ", distance=" + distance + ", maxFlow=" + maxFlow
+				+ ", canal=" + canal + ", scenario=" + scenario.getId() + "]";
 	}
 
 	@Override
